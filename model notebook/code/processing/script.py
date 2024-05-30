@@ -1,5 +1,6 @@
 # | filename: script.py
 # | code-line-numbers: true
+
 import warnings
 warnings.filterwarnings('ignore')
 import os
@@ -190,7 +191,7 @@ def _read_data_from_input_csv_files(base_directory):
     This function reads every CSV file available and
     concatenates them into a single dataframe.
     """
-    input_directory = Path(base_directory) 
+    input_directory = Path(base_directory)/ "input"
     files = list(input_directory.glob("*.csv"))
 
     if len(files) == 0:
@@ -301,7 +302,6 @@ def _save_model(base_directory, target_transformer, features_transformer):
             tar.add(
                 Path(directory) / "features.joblib", arcname="features.joblib",
             )
-
 
 if __name__ == "__main__":
     preprocess(base_directory="/opt/ml/processing")
