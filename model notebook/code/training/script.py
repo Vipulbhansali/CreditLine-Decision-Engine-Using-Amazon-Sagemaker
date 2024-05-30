@@ -36,9 +36,9 @@ def train_xgboost(
     dvalid = xgb.DMatrix(X_validation, label=y_validation)
 
     params = {
-        "objective": "multi:softprob",
-        "num_class": 3,
-        "eval_metric": "mlogloss",
+        "objective": "binary:logistic",
+        "min_child_weight": 5,
+        "eval_metric": "nlogloss",
         "learning_rate": 0.005,
         "max_depth": 3,
         "subsample": 0.8,
