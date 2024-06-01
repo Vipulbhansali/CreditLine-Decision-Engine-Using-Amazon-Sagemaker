@@ -22,7 +22,7 @@ def train_xgboost(
     validation_path,
     pipeline_path,
     experiment,
-    num_boost_round=25
+    num_boost_round=50  # Default value set to 50
 ):
     X_train = pd.read_csv(Path(train_path) / "train.csv")
     y_train = X_train[X_train.columns[-1]]
@@ -37,19 +37,20 @@ def train_xgboost(
 
     params = {
         "objective": "binary:logistic",
-        "min_child_weight": 5,
-        "eval_metric": "nlogloss",
-        "learning_rate": 0.005,
-        "max_depth": 3,
+        "min_child_weight": 1,
+        "eval_metric": "logloss",
+        "learning_rate": 0.1,
+        "max_depth": 6,
         "subsample": 0.8,
         "colsample_bytree": 0.8,
         "alpha": 0.1,
         "lambda": 1,
+        "gamma": 0.1,
     }
 
     evals = [(dtrain, "train"), (dvalid, "valid")]
 
-    bst = xgb.train(params, dtrain, num_boost_round=num_boost_round, evals=evals)
+    bst = xgb.train(params, dtrain, num_boost_round=num_boost_round, evals=evals, verbose_eval=2)
 
     pred_probs = bst.predict(dvalid)
     predictions = (pred_probs > 0.5).astype(int)
@@ -79,7 +80,7 @@ def train_xgboost(
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument("--num_boost_round", type=int, default=50)
+    # Removed the command-line argument for num_boost_round
     args, _ = parser.parse_known_args()
 
     comet_api_key = os.environ.get("COMET_API_KEY", None)
@@ -100,20 +101,18 @@ if __name__ == "__main__":
     training_env = json.loads(os.environ.get("SM_TRAINING_ENV", {}))
     job_name = training_env.get("job_name", None) if training_env else None
 
-
     # We want to use the SageMaker's training job name as the name
     # of the experiment so we can easily recognize it.
     if job_name and experiment:
         experiment.set_name(job_name)
 
-    train_xgboost( #This is the location where we need to save our model.
+    train_xgboost(  # This is the location where we need to save our model.
         # SageMaker will create a model.tar.gz file with anything
         # inside this directory when the training script finishes.
         model_directory=os.environ["SM_MODEL_DIR"],
         train_path=os.environ["SM_CHANNEL_TRAIN"],
         validation_path=os.environ["SM_CHANNEL_VALIDATION"],
         pipeline_path=os.environ["SM_CHANNEL_PIPELINE"],
-        experiment=experiment,
-        num_boost_round=args.num_boost_round,
+        experiment=experiment
+        
     )
-

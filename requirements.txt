@@ -14,3 +14,4 @@ nbdev
 nbclient
 ipykernel
 Flask
+xgboost

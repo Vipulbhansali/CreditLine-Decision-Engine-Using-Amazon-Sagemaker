@@ -49,16 +49,14 @@ def preprocess(base_directory):
 
 
 # Define the ordinal encoders
-    ordinal_grade_transformer = OrdinalEncoder(categories=grade_categories)
-    ordinal_revol_util_transformer = OrdinalEncoder(categories=revol_util_bins_categories)
-    ordinal_home_ownership_transformer = OrdinalEncoder(categories=home_ownership_categories)
+    ordinal_grade_transformer = OrdinalEncoder(categories=grade_categories,handle_unknown='use_encoded_value', unknown_value=-1)
+    ordinal_revol_util_transformer = OrdinalEncoder(categories=revol_util_bins_categories,handle_unknown='use_encoded_value', unknown_value=-1)
+    ordinal_home_ownership_transformer = OrdinalEncoder(categories=home_ownership_categories,handle_unknown='use_encoded_value', unknown_value=-1)
 
     #Define the one-hot encoder for the 'pincode' variable
-    one_hot_encoder = OneHotEncoder()
+    one_hot_encoder = OneHotEncoder(handle_unknown='ignore')
 
-    
-    
-        # Define the categorical transformer pipeline
+    # Define the categorical transformer pipeline
     categorical_transformer = ColumnTransformer(
         transformers=[
             ('grade', ordinal_grade_transformer, ['grade']),
@@ -207,8 +205,13 @@ def _read_data_from_input_csv_files(base_directory):
 
 def _split_data(df):
     """Split the data into train, validation, and test."""
-    df_train, temp = train_test_split(df, test_size=0.3)
-    df_validation, df_test = train_test_split(temp, test_size=0.5)
+    df_train, temp = train_test_split(df, test_size=0.3,random_state=42)
+    df_validation, df_test = train_test_split(temp, test_size=0.5,random_state=42)
+    
+    column_names = df.columns
+    df_train.columns = column_names
+    df_validation.columns = column_names
+    df_test.columns = column_names
 
     return df_train, df_validation, df_test
 
@@ -274,13 +277,18 @@ def _save_splits(
     validation_path.mkdir(parents=True, exist_ok=True)
     test_path.mkdir(parents=True, exist_ok=True)
 
-    pd.DataFrame(train).to_csv(train_path / "train.csv", header=False, index=False)
-    pd.DataFrame(validation).to_csv(
+    # Convert numpy arrays back to DataFrame with column names
+    feature_columns = [f'feature_{i}' for i in range(X_train.shape[1])]
+    target_column_name = 'pre_approved_offer'  
+    column_names = feature_columns + [target_column_name]
+
+    pd.DataFrame(train, columns=column_names).to_csv(train_path / "train.csv", header=True, index=False)
+    pd.DataFrame(validation, columns=column_names).to_csv(
         validation_path / "validation.csv",
-        header=False,
+        header=True,
         index=False,
     )
-    pd.DataFrame(test).to_csv(test_path / "test.csv", header=False, index=False)
+    pd.DataFrame(test, columns=column_names).to_csv(test_path / "test.csv", header=True, index=False)
 
 
 def _save_model(base_directory, target_transformer, features_transformer):
