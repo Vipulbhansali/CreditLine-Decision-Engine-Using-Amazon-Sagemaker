@@ -116,7 +116,7 @@ def convert_to_lowercase(df):
 
 def extract_and_transform_features(df):
     # Extract pincode if needed
-    df['pincode'] = df['address'].str.extract(r'(\d{5})$')
+    df['pincode'] = df['address'].str.extract(r'(\d{5})$').astype(str)
     
     df['term'] = df['term'].astype(str).str.strip().map({'36 months': 3, '60 months': 5}).astype(int)
     
