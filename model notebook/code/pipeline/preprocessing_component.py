@@ -17,7 +17,11 @@ except ImportError:
     worker = None
 
 TARGET_COLUMN = 'pre_approved_offer'
+
 feature_columns = [
+    "loan_amnt",
+    "term",
+    "int_rate",
     "installment",
     "grade",
     "sub_grade",
@@ -66,10 +70,10 @@ def input_fn(input_data, content_type):
         # If we find an extra column, it's probably the target
         # feature, so let's drop it. We'll assume the target
         # is always the first column,
-        if len(df.columns) == len(FEATURE_COLUMNS) + 1:
+        if len(df.columns) == len(feature_columns) + 1:
             df = df.drop(df.columns[-1], axis=1)
 
-        df.columns = FEATURE_COLUMNS
+        df.columns = feature_columns
         return df
 
     if content_type == "application/json":
@@ -77,8 +81,11 @@ def input_fn(input_data, content_type):
 
         if TARGET_COLUMN in df.columns:
             df = df.drop(TARGET_COLUMN, axis=1)
-
+            
+         # Filter out any columns not in feature_columns
+        df = df[feature_columns]
         return df
+        
 
     raise ValueError(f"{content_type} is not supported!")
 
