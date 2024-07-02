@@ -1,0 +1,19 @@
+FROM continuumio/miniconda3
+
+# Install scikit-learn and XGBoost
+RUN conda install -y scikit-learn xgboost
+
+# Install additional dependencies if needed
+RUN pip install sagemaker flask
+
+# Copy your evaluation script and health check script into the container
+COPY script.py /opt/program/script.py
+COPY health_check.py /opt/program/health_check.py
+
+# Set the working directory
+WORKDIR /opt/program
+
+# Set the entry point to start the Flask app
+ENTRYPOINT ["python3", "health_check.py"]
+
+

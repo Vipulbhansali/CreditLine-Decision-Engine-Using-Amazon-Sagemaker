@@ -1,7 +1,6 @@
 # | filename: script.py
 # | code-line-numbers: true
 
-
 import argparse
 import json
 import os
@@ -60,8 +59,11 @@ def train_xgboost(
     model_filepath = Path(model_directory) / "xgboost_model.json"
     bst.save_model(model_filepath)
 
-    # Let's save the transformation pipelines inside the
-    # model directory so they get bundled together.
+    # Create a tar.gz file and add the model file with the correct name
+    with tarfile.open(Path(model_directory) / "model.tar.gz", "w:gz") as tar:
+        tar.add(model_filepath, arcname="xgboost_model.json")
+
+    # Extract existing files from model.tar.gz (if needed)
     with tarfile.open(Path(pipeline_path) / "model.tar.gz", "r:gz") as tar:
         tar.extractall(model_directory)
 
@@ -80,7 +82,6 @@ def train_xgboost(
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    # Removed the command-line argument for num_boost_round
     args, _ = parser.parse_known_args()
 
     comet_api_key = os.environ.get("COMET_API_KEY", None)
@@ -101,18 +102,13 @@ if __name__ == "__main__":
     training_env = json.loads(os.environ.get("SM_TRAINING_ENV", {}))
     job_name = training_env.get("job_name", None) if training_env else None
 
-    # We want to use the SageMaker's training job name as the name
-    # of the experiment so we can easily recognize it.
     if job_name and experiment:
         experiment.set_name(job_name)
 
-    train_xgboost(  # This is the location where we need to save our model.
-        # SageMaker will create a model.tar.gz file with anything
-        # inside this directory when the training script finishes.
+    train_xgboost(
         model_directory=os.environ["SM_MODEL_DIR"],
         train_path=os.environ["SM_CHANNEL_TRAIN"],
         validation_path=os.environ["SM_CHANNEL_VALIDATION"],
         pipeline_path=os.environ["SM_CHANNEL_PIPELINE"],
         experiment=experiment
-        
     )
