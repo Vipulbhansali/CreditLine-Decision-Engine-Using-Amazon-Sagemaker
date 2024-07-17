@@ -1,9 +1,11 @@
-**XGBoost Machine Learning Project using Amazon SageMaker**
+# XGBoost Machine Learning Project using Amazon SageMaker #
 
 
 This project demonstrates the implementation of a complete machine learning pipeline using XGBoost on Amazon SageMaker.
 
 ## Table of Contents
+
+The project has been developed over following steps :
 
 - Step 1: Project & Variable Setup
 - Step 2: Splitting and Transforming the Data
@@ -34,5 +36,11 @@ This project demonstrates the implementation of a complete machine learning pipe
 - SageMaker execution role
 - S3 bucket for data storage
 - Necessary IAM policies
+
+## Experiment Tracking with Comet
+
+This project uses Comet for tracking experiments, visualizing metrics, and logging artifacts. Comet provides an easy-to-use interface to monitor the progress of machine learning experiments.
+
+
 
 

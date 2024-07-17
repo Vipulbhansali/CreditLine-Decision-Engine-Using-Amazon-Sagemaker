@@ -1,0 +1,67 @@
+Folder PATH listing for volume Windows-SSD
+Volume serial number is 626B-7553
+C:.
+¦   .env
+¦   .gitignore
+¦   credit.csv
+¦   LICENSE
+¦   README.md
+¦   requirements.txt
+¦   structure.txt
+¦   
++---Custom_docker_image_for_evaluation
+¦       Dockerfile
+¦       script.py
+¦       
++---docker_image_2
+¦       dockerfile
+¦       health_check.py
+¦       script.py
+¦       
++---model notebook
+    ¦   eda_model_building.ipynb
+    ¦   model.ipynb
+    ¦   
+    +---code
+        +---evaluation
+        ¦       evaluate_test_script.py
+        ¦       script.py
+        ¦       
+        +---lambda
+        ¦       lambda.py
+        ¦       
+        +---monitoring
+        ¦       data_quality_preprocessor.py
+        ¦       
+        +---pipeline
+        ¦   ¦   postprocessing_component.py
+        ¦   ¦   postprocessing_component_test.py
+        ¦   ¦   preprocessing_component.py
+        ¦   ¦   preprocessing_component_test.py
+        ¦   ¦   
+        ¦   +---__pycache__
+        ¦           postprocessing_component.cpython-310.pyc
+        ¦           preprocessing_component.cpython-310.pyc
+        ¦           
+        +---processing
+        ¦   ¦   processing_test.py
+        ¦   ¦   script.py
+        ¦   ¦   
+        ¦   +---__pycache__
+        ¦           script.cpython-310.pyc
+        ¦           
+        +---serving
+        ¦   ¦   app.py
+        ¦   ¦   model.tar.gz
+        ¦   ¦   
+        ¦   +---temp
+        ¦           xgboost_model.json
+        ¦           
+        +---training
+            ¦   requirements.txt
+            ¦   script.py
+            ¦   test.py
+            ¦   
+            +---__pycache__
+                    script.cpython-310.pyc
+                    
