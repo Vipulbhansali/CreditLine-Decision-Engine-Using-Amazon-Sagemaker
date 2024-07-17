@@ -5,10 +5,10 @@ This project demonstrates the implementation of a complete machine learning pipe
 
 ## Table of Contents
 
-Step 1: Project & Variable Setup
-Step 2: Splitting and Transforming the Data
-Step 3: Training the Model
-Step 4: Tuning the Model
+- Step 1: Project & Variable Setup
+- Step 2: Splitting and Transforming the Data
+- Step 3: Training the Model
+- Step 4: Tuning the Model
 Step 5: Evaluating the Model
 Step 6: Registering the Model
 Step 7: Conditional Registration
