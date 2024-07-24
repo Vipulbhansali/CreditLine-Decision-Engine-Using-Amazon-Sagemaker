@@ -1,4 +1,4 @@
-%%ipytest
+#%%ipytest
 #| code-fold: true
 
 from pipeline.preprocessing_component import input_fn, predict_fn, output_fn, model_fn,feature_columns,TARGET_COLUMN
@@ -24,7 +24,7 @@ import numpy as np
 
 ipytest.autoconfig()
 
-DATA_FILEPATH = r"C:\Users\Vipul\CreditLine-Decision-Engine-Using-Amazon-Sagemaker\credit.csv"
+DATA_FILEPATH = DATA_FILEPATH = os.getenv('LOCAL_CSV_PATH',None)
 
 sample_csv_row = """10000.0,36 months,11.44,329.48,B,B4,Marketing,10+ years,RENT,117000.0,Not Verified,Jan-2015,Fully Paid,vacation,Vacation,26.24,Jun-1990,16.0,0.0,36369.0,41.8,25.0,w,INDIVIDUAL,0.0,0.0,0174 Michelle Gateway\r\nMendozaberg, OK 22690"""
 

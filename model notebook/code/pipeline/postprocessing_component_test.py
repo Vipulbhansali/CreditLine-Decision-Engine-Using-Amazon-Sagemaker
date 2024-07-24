@@ -1,7 +1,3 @@
-%%ipytest
-#| code-fold: true
-
-
 import numpy as np
 
 from pipeline.postprocessing_component import predict_fn, output_fn
@@ -33,4 +29,4 @@ def test_output_returns_array_if_multiple_predictions():
     assert response[0]["prediction"] == "Yes"
     assert response[1]["prediction"] == "No"
 
-%%writefile {CODE_FOLDER}/pipeline/postprocessing_component_test.py
+

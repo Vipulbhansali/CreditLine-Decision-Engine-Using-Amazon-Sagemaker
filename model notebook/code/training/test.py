@@ -1,8 +1,3 @@
-%%script false
-
-%%ipytest -s
-#| code-fold: true
-
 import os
 import shutil
 import tempfile
@@ -11,7 +6,7 @@ import pandas as pd
 from processing.script import preprocess
 from training.script import train_xgboost
 
-DATA_FILEPATH = r"C:\Users\Vipul\CreditLine-Decision-Engine-Using-Amazon-Sagemaker\credit.csv"
+DATA_FILEPATH = DATA_FILEPATH = os.getenv('LOCAL_CSV_PATH',None)
 
 # Run the fixture code manually
 directory = tempfile.mkdtemp()

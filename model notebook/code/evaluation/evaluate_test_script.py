@@ -1,5 +1,4 @@
-%%script false
-%%ipytest -s
+
 #| code-fold: true
 
 import os
@@ -15,7 +14,7 @@ from processing.script import preprocess
 from training.script import train_xgboost
 
 # Define the path to the actual data file
-DATA_FILEPATH = r"C:\Users\Vipul\CreditLine-Decision-Engine-Using-Amazon-Sagemaker\credit.csv"
+DATA_FILEPATH = DATA_FILEPATH = os.getenv('LOCAL_CSV_PATH',None)
 
 @pytest.fixture(scope="function", autouse=False)
 def directory():

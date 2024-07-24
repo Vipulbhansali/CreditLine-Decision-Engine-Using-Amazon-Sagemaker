@@ -1,14 +1,12 @@
-
-%%script false
 import pandas as pd
 from processing.script import convert_to_lowercase, handle_missing_values, extract_and_transform_features, adjust_numeric_features, add_new_feature, drop_column
 from sklearn.compose import ColumnTransformer
 from sklearn.pipeline import make_pipeline
 from sklearn.preprocessing import OneHotEncoder, OrdinalEncoder, FunctionTransformer
+import os
 
 # Path to the CSV file
-csv_file_path = r'C:\Users\Vipul\CreditLine-Decision-Engine-Using-Amazon-Sagemaker\credit.csv'
-
+csv_file_path = DATA_FILEPATH = os.getenv('LOCAL_CSV_PATH',None)
 # Read the CSV file
 raw_data = pd.read_csv(csv_file_path)
 
