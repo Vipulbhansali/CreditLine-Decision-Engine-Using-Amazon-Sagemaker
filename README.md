@@ -32,7 +32,8 @@ The project has been developed over following steps :
 ## Architecture and Setup
 
 **Environment Setup**: Ensure the following are set up:
-- Amazon SageMaker notebook instance
+
+- Instance above ml.m5.xarge
 - SageMaker execution role
 - S3 bucket for data storage
 - Necessary IAM policies
@@ -41,6 +42,10 @@ The project has been developed over following steps :
 
 This project uses Comet for tracking experiments, visualizing metrics, and logging artifacts. Comet provides an easy-to-use interface to monitor the progress of machine learning experiments.
 
+
+## Split and Transform
+
+This step uses an AWS SageMaker 'Processing Job' with an SKLearn processor to split the dataset into training, validation, and test sets, apply necessary transformations, save the data splits to S3, and store the transformation pipelines in a `model.tar.gz` file.
 
 
 
