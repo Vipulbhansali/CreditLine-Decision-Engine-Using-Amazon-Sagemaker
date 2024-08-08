@@ -61,9 +61,9 @@ This step uses an AWS SageMaker tuner to optimize the hyperparameters of the mac
 ## Evaluation
 
 This step uses an AWS SageMaker processing job to evaluate the machine learning model. It performs the following tasks:
- - 1. Loads the test data and the trained model into memory, and evaluates the model to generate metrics like accuracy and precision, saving the results in `evaluation.json` and uploading it to S3.
- - 2. Maps the `evaluation.json` output to a property file for easy retrieval in the pipeline.
- - 3. Uses a custom Docker image that includes both the SKLearn processor and XGBoost, uploaded to a registry and used for the processing container.
+ - Loads the test data and the trained model into memory, and evaluates the model to generate metrics like accuracy and precision, saving the results in `evaluation.json` and uploading it to S3.
+ - Maps the `evaluation.json` output to a property file for easy retrieval in the pipeline.
+ - Uses a custom Docker image that includes both the SKLearn processor and XGBoost, uploaded to a registry and used for the processing container.
 
 
 
