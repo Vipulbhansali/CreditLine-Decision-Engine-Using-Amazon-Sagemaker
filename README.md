@@ -58,5 +58,14 @@ This step uses an AWS SageMaker estimator to train the machine learning model. T
 This step uses an AWS SageMaker tuner to optimize the hyperparameters of the machine learning model. The tuner explores various hyperparameter configurations by running a hyperparameter tuning job to find the best set of parameters, and the results are saved to S3.
 
 
+## Evaluation
+
+This step uses an AWS SageMaker processing job to evaluate the machine learning model. It performs the following tasks:
+ - 1. Loads the test data and the trained model into memory, and evaluates the model to generate metrics like accuracy and precision, saving the results in `evaluation.json` and uploading it to S3.
+ - 2. Maps the `evaluation.json` output to a property file for easy retrieval in the pipeline.
+ - 3. Uses a custom Docker image that includes both the SKLearn processor and XGBoost, uploaded to a registry and used for the processing container.
+
+
+
 
 
