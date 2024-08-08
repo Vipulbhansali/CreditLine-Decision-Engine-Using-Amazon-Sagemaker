@@ -48,4 +48,15 @@ This project uses Comet for tracking experiments, visualizing metrics, and loggi
 This step uses an AWS SageMaker 'Processing Job' with an SKLearn processor to split the dataset into training, validation, and test sets, apply necessary transformations, save the data splits to S3, and store the transformation pipelines in a `model.tar.gz` file.
 
 
+## Training
+
+This step uses an AWS SageMaker estimator to train the machine learning model. The estimator handles the training process, and the trained model is saved to S3 for future use.
+
+
+## Tuning
+
+This step uses an AWS SageMaker tuner to optimize the hyperparameters of the machine learning model. The tuner explores various hyperparameter configurations by running a hyperparameter tuning job to find the best set of parameters, and the results are saved to S3.
+
+
+
 
