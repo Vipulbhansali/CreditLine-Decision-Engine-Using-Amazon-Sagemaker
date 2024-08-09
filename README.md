@@ -66,6 +66,32 @@ This step uses an AWS SageMaker processing job to evaluate the machine learning 
  - Uses a custom Docker image that includes both the SKLearn processor and XGBoost, uploaded to a registry and used for the processing container.
 
 
+## Model Registration
+
+This step involves registering the trained model in the AWS SageMaker Model Registry. It includes the following tasks:
+
+-  Creates an instance of the built-in XGBoost class to be used as the container for the model.
+-  Populates the model's metrics, generated during the evaluation step, using the `ModelMetrics` class.
+-  Uses the `ModelStep` to register the model in the Model Registry, making it available for deployment and further use.
+
+## Conditional Registration
+
+This step adds conditional logic to the model registration process in the AWS SageMaker pipeline. It includes the following tasks:
+
+- Sets a performance threshold for the model and defines a fail step using the `FailStep` class from SageMaker.
+- Creates a condition using the `sagemaker.workflow.condition.Condition` class to check if the model meets the threshold.
+- Uses a `ConditionStep` to determine whether to proceed with model registration or trigger the fail step, and adds this logic to the pipeline.
+
+
+# Serving the Model
+
+This step involves deploying the top-performing model locally. It includes the following tasks:
+- Retrieves the top-performing model from the SageMaker Model Registry using the SageMaker client (`boto3` API) and downloads it.
+- Builds a simple Flask application as a wrapper around the model.
+- Serves the model locally using the Flask app, enabling it to handle inference requests.
+
+
+
 
 
 
