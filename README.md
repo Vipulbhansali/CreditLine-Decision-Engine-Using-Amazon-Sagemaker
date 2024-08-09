@@ -97,6 +97,9 @@ This step involves deploying the registered model in AWS SageMaker. It includes 
 - Creates a model package using the `ModelPackage` class from SageMaker.
 - Utilizes the ARN of the model registered in the Model Registry to specify which model to deploy.
 - Deploys the model, making it available for inference in the specified environment.
+- Then we test the Endpoint by sending a payload, using Predictor class by sagemaker.
+
+
 
 
 
