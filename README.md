@@ -83,12 +83,21 @@ This step adds conditional logic to the model registration process in the AWS Sa
 - Uses a `ConditionStep` to determine whether to proceed with model registration or trigger the fail step, and adds this logic to the pipeline.
 
 
-# Serving the Model
+## Serving the Model
 
 This step involves deploying the top-performing model locally. It includes the following tasks:
 - Retrieves the top-performing model from the SageMaker Model Registry using the SageMaker client (`boto3` API) and downloads it.
 - Builds a simple Flask application as a wrapper around the model.
 - Serves the model locally using the Flask app, enabling it to handle inference requests.
+
+
+## Deploy the Model
+
+This step involves deploying the registered model in AWS SageMaker. It includes the following tasks:
+- Creates a model package using the `ModelPackage` class from SageMaker.
+- Utilizes the ARN of the model registered in the Model Registry to specify which model to deploy.
+- Deploys the model, making it available for inference in the specified environment.
+
 
 
 
