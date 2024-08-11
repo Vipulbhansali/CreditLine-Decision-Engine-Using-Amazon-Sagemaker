@@ -37,6 +37,8 @@ The project has been developed over following steps :
 - SageMaker execution role
 - S3 bucket for data storage
 - Necessary IAM policies
+- XGBoost image
+- Boto3 and IAM client setup
 
 ## Experiment Tracking with Comet
 
@@ -98,6 +100,24 @@ This step involves deploying the registered model in AWS SageMaker. It includes 
 - Utilizes the ARN of the model registered in the Model Registry to specify which model to deploy.
 - Deploys the model, making it available for inference in the specified environment.
 - Then we test the Endpoint by sending a payload, using Predictor class by sagemaker.
+
+
+## Deploying from the Pipeline
+
+This step automates the deployment of the model from the pipeline with data capture enabled. 
+It includes the following tasks:
+- Enables Data Capture as part of the SageMaker endpoint configuration, capturing all input data and the corresponding predictions.
+- Sets up a Lambda function to handle the deployment of the model, triggered as part of the pipeline.
+- The Lambda function is invoked by the pipeline to deploy the model to the specified endpoint, ensuring seamless integration with the overall workflow.
+
+# Deploying from the Event (Human in the Loop Deployment)
+
+This step integrates human-in-the-loop deployment by triggering model deployment through an event. It includes the following tasks:
+- Configures Amazon EventBridge to trigger a Lambda function by creating an EventBridge rule.
+- Sets the Lambda function as the target for the EventBridge rule and updates its permissions to allow triggering by the rule.
+- Updates the pipeline steps to incorporate this event-driven deployment process, allowing for human intervention before the model is deployed.
+
+
 
 
 
