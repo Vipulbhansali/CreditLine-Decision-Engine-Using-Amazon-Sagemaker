@@ -110,7 +110,7 @@ It includes the following tasks:
 - Sets up a Lambda function to handle the deployment of the model, triggered as part of the pipeline.
 - The Lambda function is invoked by the pipeline to deploy the model to the specified endpoint, ensuring seamless integration with the overall workflow.
 
-# Deploying from the Event (Human in the Loop Deployment)
+## Deploying from the Event (Human in the Loop Deployment)
 
 This step integrates human-in-the-loop deployment by triggering model deployment through an event. It includes the following tasks:
 - Configures Amazon EventBridge to trigger a Lambda function by creating an EventBridge rule.
