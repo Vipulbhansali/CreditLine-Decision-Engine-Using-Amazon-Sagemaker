@@ -117,6 +117,15 @@ This step integrates human-in-the-loop deployment by triggering model deployment
 - Sets the Lambda function as the target for the EventBridge rule and updates its permissions to allow triggering by the rule.
 - Updates the pipeline steps to incorporate this event-driven deployment process, allowing for human intervention before the model is deployed.
 
+## # Inference Pipeline Step
+
+- **Preprocessing**: The preprocessing container transforms raw input data into a format suitable for model inference, handling tasks like feature extraction and encoding.
+
+- **Model Prediction**: The model container receives the preprocessed data and generates predictions based on the input, such as numerical classifications or probabilities.
+
+- **Postprocessing**: The postprocessing container converts the model's predictions into human-readable output. The containers communicate via HTTP using the `worker` from `sagemaker-containers`.
+
+
 
 
 
