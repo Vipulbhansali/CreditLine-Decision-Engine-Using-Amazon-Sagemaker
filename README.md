@@ -125,6 +125,12 @@ This step integrates human-in-the-loop deployment by triggering model deployment
 
 - **Postprocessing**: The postprocessing container converts the model's predictions into human-readable output. The containers communicate via HTTP using the `worker` from `sagemaker-containers`.
 
+## Data Quality Baseline
+
+This step sets up and computes the data quality baseline in the pipeline. It includes the following tasks:
+- Configures the instance that will run the data quality check using the `CheckJobConfig` class.
+- Utilizes the `QualityCheckStep` to compute general statistics and other quality metrics for the data, with the `quality_check_config` argument specifying the configuration for this check.
+- Configures a new set of `ModelMetrics` using the results from the Quality Check Step, particularly focusing on `DriftCheckBaselines`, to establish the data quality baseline.
 
 
 
