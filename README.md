@@ -139,6 +139,14 @@ This step sets up and computes the data quality baseline in the pipeline. It inc
 
 ##  Data Monitoring 
 
+This step involves setting up continuous monitoring of the data received by the model endpoint. It includes the following tasks:
+- Stores all incoming data at the endpoint using the data capture configuration, which is later used for monitoring the model.
+- Creates a preprocessing script that configures the data to be used by the monitoring job and uploads this script to S3.
+- Sets up a Data Quality Monitoring Job using the `DefaultModelMonitor` class as `data_monitor`.
+- Creates a monitoring schedule for `data_monitor` to regularly check the data quality.
+- Monitors for any data quality violations by querying the results using `boto3`.
+
+
 
 
 
