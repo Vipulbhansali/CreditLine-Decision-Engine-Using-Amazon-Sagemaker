@@ -136,6 +136,15 @@ This step sets up and computes the data quality baseline in the pipeline. It inc
 - Utilizes the `QualityCheckStep` to compute general statistics and other quality metrics for the data, with the `quality_check_config` argument specifying the configuration for this check.
 - Configures a new set of `ModelMetrics` using the results from the Quality Check Step, particularly focusing on `DriftCheckBaselines`, to establish the data quality baseline.
 
+## Model Quality Baseline
+
+This step establishes the model quality baseline using test data and predictions. It includes the following tasks:
+- Uses the test baseline data created in the Split & Transform step and trains it through the model.
+- Executes a Batch Transform Job to generate predictions for each sample in the test set by configuring a transformer. The output includes two fields: the ground truth label and the model's prediction.
+- Configures the Quality Check Step and inputs the data generated in the Transform Step.
+- Sets up a new set of `ModelMetrics` (drift check baseline) using the results from the Quality Check Step.
+- Creates a new pipeline and adds both the Data Quality Baseline step and the Model Quality Baseline step to this pipeline.
+
 
 ##  Data Monitoring 
 
