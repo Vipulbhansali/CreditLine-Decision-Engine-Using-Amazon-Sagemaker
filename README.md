@@ -5,7 +5,7 @@ This project demonstrates the implementation of a complete machine learning pipe
 
 ## Pipeline in SageMaker
 
-![alt text](<Screenshot 2024-08-23 215655.png>)
+
 
 ## Table of Contents
 
