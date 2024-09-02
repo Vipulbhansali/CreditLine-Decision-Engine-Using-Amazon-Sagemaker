@@ -3,6 +3,10 @@
 
 This project demonstrates the implementation of a complete machine learning pipeline using XGBoost on Amazon SageMaker.
 
+## Pipeline in SageMaker
+
+![alt text](<Screenshot 2024-08-23 215655.png>)
+
 ## Table of Contents
 
 The project has been developed over following steps :
@@ -133,6 +137,7 @@ This step sets up and computes the data quality baseline in the pipeline. It inc
 - Configures a new set of `ModelMetrics` using the results from the Quality Check Step, particularly focusing on `DriftCheckBaselines`, to establish the data quality baseline.
 
 
+##  Data Monitoring 
 
 
 
