@@ -156,6 +156,15 @@ This step involves setting up continuous monitoring of the data received by the 
 - Monitors for any data quality violations by querying the results using `boto3`.
 
 
+## Model Monitoring
+
+This step sets up continuous monitoring of the deployed model's performance. It includes the following tasks:
+- Generates traffic to the endpoint to test the monitoring functionality, and generates labels for these samples.
+- Sets up a Model Quality Monitoring Job using the `ModelQualityMonitor` class.
+- Configures the model monitoring job by providing the model's predictions, ground truth labels, and constraints calculated during the Model Quality Baseline step.
+- Checks for any violations in the model's performance against the defined constraints, ensuring the model's predictions remain within acceptable bounds.
+
+
 
 
 
